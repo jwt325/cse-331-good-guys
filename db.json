@@ -1,0 +1,29 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "username": "user1",
+        "password": "plaintext",  
+        "skill_level": "advanced",
+        "motivation": "competitive play"
+      }
+    ],
+    "games": [
+      {
+        "id": 1,
+        "title": "Pick-up Basketball",
+        "description": "Casual game at the local park",
+        "host_id": 1,
+        "location": "Local Park"
+      }
+    ],
+    "game_players": [
+      {
+        "id": 1,
+        "game_id": 1,
+        "user_id": 1,
+        "is_host": true
+      }
+    ]
+  }
+  
