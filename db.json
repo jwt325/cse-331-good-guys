@@ -20,11 +20,15 @@
   ],
   "games": [
     {
-      "id": "1",
-      "title": "Pick-up Basketball",
-      "description": "Casual game at the local park",
-      "host_id": 1,
-      "location": "Local Park"
+      "id": "76bc",
+      "title": "3v3 basketball",
+      "description": "something",
+      "user_id": 1,
+      "location": "outdoor courts",
+      "sport": "basketball",
+      "skill": "advanced",
+      "players": [],
+      "num_players": 5
     }
   ],
   "game_players": [

@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("output").textContent = "Failed to load data from backend.";
       });
 
-    fetchUser("user1", "plaintext").then(user => {
-      console.log(user);
-    })
+      
   });
   
