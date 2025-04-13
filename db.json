@@ -11,6 +11,7 @@
       "games_attended": 5,
       "games_enrolled": 6,
       "motivation": "competitive play",
+      "location": 18015,
       "metrics": {
         "batting_avg": 0.75,
         "ppg": 15.3
