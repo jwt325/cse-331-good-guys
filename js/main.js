@@ -8,7 +8,9 @@ const gameForm = document.getElementById('gameForm');
 
 if (currentUser) {
   authDiv.innerHTML = `
-    <span>Account: ${currentUser.username}</span>
+    <span style="cursor: pointer; text-decoration: underline;" onclick="goToUserPage()">
+      Account: ${currentUser.username}
+    </span>
     <button onclick="logout()">Logout</button>
   `;
   gameForm.style.display = 'block';
@@ -18,6 +20,11 @@ if (currentUser) {
     <button onclick="openModal(true)">Sign Up</button>
   `;
 }
+
+function goToUserPage() {
+  window.location.href = 'user.html';
+}
+
 
 function logout() {
   localStorage.removeItem('loggedInUser');

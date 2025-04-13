@@ -7,7 +7,7 @@
 <body>
   <h1>User Profile</h1>
   <div id="profileInfo"></div>
-  <button onclick="window.location.href='feed.html'">Back to Feed</button>
+  <button onclick="window.location.href='index.html'">Back to Feed</button>
   <button onclick="logout()">Logout</button>
 
   <script>
@@ -17,8 +17,15 @@
     } else {
       const div = document.getElementById('profileInfo');
       div.innerHTML = `
-        <p>Name: ${user.name}</p>
-        <p>Email: ${user.email}</p>
+        <p><strong>Username:</strong> ${user.username}</p>
+        <p><strong>Password:</strong> ${user.password}</p>
+        <p><strong>Sports:</strong></p>
+        <ul>
+          ${Object.entries(user.sports).map(([sport, level]) => `<li>${sport}: ${level}</li>`).join('')}
+        </ul>
+        <p><strong>Games Attended:</strong> ${user.games_attended}</p>
+        <p><strong>Games Enrolled:</strong> ${user.games_enrolled}</p>
+        <p><strong>Motivation:</strong> ${user.motivation}</p>
       `;
     }
 
