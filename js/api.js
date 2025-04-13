@@ -49,3 +49,4 @@ function createUser(newUser) {
 
 // Expose createUser function
 window.createUser = createUser;
+

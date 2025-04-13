@@ -4,7 +4,12 @@
       "id": "1",
       "username": "user1",
       "password": "plaintext",
-      "skill_level": "advanced",
+      "sports": {
+        "basketball": "beginner",
+        "tennis": "advanced"
+      },
+      "games_attended": 5,
+      "games_enrolled": 6,
       "motivation": "competitive play"
     }
   ],
