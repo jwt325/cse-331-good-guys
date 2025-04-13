@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Sports Matching App - Test</title>
-  </head>
-  <body>
-    <h1>Backend Test</h1>
-    <!-- A div element that will display the fetched data -->
-    <div id="output">Loading data from backend...</div>
-    <!-- Include the API and main scripts -->
-    <script src="js/api.js"></script>
-    <script src="js/main.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <title>Game Finder</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
 
-    
-  </body>
+  <div class="top-bar">
+    <h1>Game Finder</h1>
+    <div id="authControls" class="auth-buttons"></div>
+  </div>
+
+  <hr>
+  <h2 id="gameType">All Games</h2>
+  <ul id="gameList"></ul>
+
+  <div id="postForm" style="display: none;">
+    <h3>Create a Game</h3>
+    <textarea id="postContent" rows="3" cols="50" placeholder="Placeholder"></textarea><br>
+    <button id="submitPostBtn">Create</button>
+  </div>
+
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h3 id="modalTitle">Login</h3>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button onclick="submitAuth()">Submit</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
 </html>

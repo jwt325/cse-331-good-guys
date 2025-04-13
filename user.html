@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Profile</title>
+</head>
+<body>
+  <h1>User Profile</h1>
+  <div id="profileInfo"></div>
+  <button onclick="window.location.href='feed.html'">Back to Feed</button>
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) {
+      window.location.href = 'index.html';
+    } else {
+      const div = document.getElementById('profileInfo');
+      div.innerHTML = `
+        <p>Name: ${user.name}</p>
+        <p>Email: ${user.email}</p>
+      `;
+    }
+
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
