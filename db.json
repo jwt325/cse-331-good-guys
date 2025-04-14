@@ -31,27 +31,30 @@
       "metrics": {}
     },
     {
-      "id": "5138",
-      "username": "Coolguy",
-      "password": "testpass",
-      "email": "test@email.com",
-      "sports": {},
-      "games_attended": 0,
-      "games_enrolled": 0,
-      "motivation": "",
-      "location": "",
-      "metrics": {}
-    },
-    {
-      "id": "6022",
-      "username": "user2",
-      "password": "plaintext2",
+      "id": "4cc4",
+      "username": "TheBomb",
+      "password": "testtesst",
+      "email": "newuser@gmail.com",
       "sports": {
         "Tennis": "Intermediate"
       },
       "games_attended": 2,
-      "games_enrolled": 0,
+      "games_enrolled": 1,
       "motivation": "To be the best!",
+      "location": "",
+      "metrics": {}
+    },
+    {
+      "id": "1f3d",
+      "username": "BestBaller",
+      "password": "password",
+      "email": "newemail@gmail.com",
+      "sports": {
+        "Basketball": "Advanced"
+      },
+      "games_attended": 5,
+      "games_enrolled": 1,
+      "motivation": "To play competitively",
       "location": "",
       "metrics": {}
     }
@@ -68,9 +71,59 @@
       "sport": "Hockey",
       "skill": "Intermediate",
       "players": [
-        "3c0d"
+        "3c0d",
+        "1",
+        "4cc4",
+        "1f3d"
       ],
       "numPlayers": "6"
+    },
+    {
+      "id": "e043",
+      "title": "Basketball Tournament",
+      "description": "We are running a $100 3v3 basketball tournament - As many teams possible.",
+      "user_id": "1",
+      "email": "test@email.com",
+      "location": "Taylor Gym",
+      "dateTime": "2025-05-09T14:20",
+      "sport": "Basketball",
+      "skill": "Advanced",
+      "players": [
+        "1",
+        "4cc4"
+      ],
+      "numPlayers": "3"
+    },
+    {
+      "id": "442c",
+      "title": "Soccer 5v5 Scrimmage",
+      "description": "Looking for short court games to learn with beginners.",
+      "user_id": "4cc4",
+      "email": "newuser@gmail.com",
+      "location": "Mountaintop Fields",
+      "dateTime": "2025-05-09T14:21",
+      "sport": "Soccer",
+      "skill": "Beginner",
+      "players": [
+        "4cc4",
+        "1f3d"
+      ],
+      "numPlayers": "10"
+    },
+    {
+      "id": "88f2",
+      "title": "Tennis Event",
+      "description": "Looking for 2v2 games need 3!",
+      "user_id": "1f3d",
+      "email": "newemail@gmail.com",
+      "location": "Mountaintop Courts",
+      "dateTime": "2025-04-25T14:23",
+      "sport": "Tennis",
+      "skill": "Intermediate",
+      "players": [
+        "1f3d"
+      ],
+      "numPlayers": "4"
     }
   ],
   "game_players": [
