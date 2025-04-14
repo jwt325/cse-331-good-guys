@@ -86,6 +86,9 @@
         <p><strong>Password:</strong> 
           <input type="password" class="editable-field" id="editPassword" value="${userData.password}">
         </p>
+        <p><strong>Email:</strong> 
+          <input type="email" class="editable-field" id="editEmail" value="${userData.email}">
+        </p>
         
         <p><strong>Sports:</strong></p>
         <div id="sportsList">
@@ -160,6 +163,7 @@
       
       // Get updated fields
       updatedUser.password = document.getElementById('editPassword').value;
+      updatedUser.email = document.getElementById('editEmail').value;
       updatedUser.games_attended = parseInt(document.getElementById('editGamesAttended').value) || 0;
       updatedUser.motivation = document.getElementById('editMotivation').value;
       
