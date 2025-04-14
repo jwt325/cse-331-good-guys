@@ -3,35 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <title>User Profile</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .editable-field {
+      border: 1px solid #ddd;
+      padding: 5px;
+      margin: 5px 0;
+    }
+    .editable-field:focus {
+      border-color: purple;
+      outline: none;
+    }
+    .save-btn {
+      background-color: purple;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <div class="profile-card">
-    <h1>User Profile</h1>
-    <div id="profileInfo"></div>
+  <h1>User Profile</h1>
+  <div id="profileInfo"></div>
+  <button onclick="window.location.href='index.html'">Back to Feed</button>
+  <button onclick="logout()">Logout</button>
 
-    <div class="profile-buttons">
-      <button onclick="window.location.href='index.html'">Back to Feed</button>
-      <button onclick="logout()">Logout</button>
-    </div>
-  </div>
-
+  <script src="js/api.js"></script>
   <script>
     const user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!user) {
-      window.location.href = 'index.html';
-    } else {
-      const div = document.getElementById('profileInfo');
-      div.innerHTML = `
-        <p><strong>Username:</strong> ${user.username}</p>
-        <p><strong>Password:</strong> ********</p>
+    if (!user) window.location.href = 'index.html';
+
+    // Render editable profile
+    const profileDiv = document.getElementById('profileInfo');
+    renderProfile(user);
+
+    function renderProfile(userData) {
+      profileDiv.innerHTML = `
+        <p><strong>Username:</strong> ${userData.username}</p>
+        <p><strong>Password:</strong> 
+          <input type="password" class="editable-field" id="editPassword" value="${userData.password}">
+        </p>
+        
         <p><strong>Sports:</strong></p>
-        <ul>
-          ${Object.entries(user.sports).map(([sport, level]) => `<li>${sport}: ${level}</li>`).join('')}
-        </ul>
-        <p><strong>Games Attended:</strong> ${user.games_attended}</p>
-        <p><strong>Games Enrolled:</strong> ${user.games_enrolled}</p>
-        <p><strong>Motivation:</strong> ${user.motivation}</p>
+        <div id="sportsList">
+          ${Object.entries(userData.sports || {}).map(([sport, level]) => `
+            <div class="sport-item">
+              <input type="text" class="editable-field" value="${sport}" placeholder="Sport">
+              <input type="text" class="editable-field" value="${level}" placeholder="Skill level">
+              <button onclick="removeSport(this)">×</button>
+            </div>
+          `).join('')}
+        </div>
+        <button onclick="addSportField()">+ Add Sport</button>
+        
+        <p><strong>Games Attended:</strong> 
+          <input type="number" class="editable-field" id="editGamesAttended" value="${userData.games_attended || 0}">
+        </p>
+        
+        <p><strong>Motivation:</strong> 
+          <textarea class="editable-field" id="editMotivation">${userData.motivation || ''}</textarea>
+        </p>
+        
+        <button class="save-btn" onclick="saveProfile()">Save Changes</button>
       `;
+    }
+
+    function addSportField() {
+      const sportsList = document.getElementById('sportsList');
+      const newSportDiv = document.createElement('div');
+      newSportDiv.className = 'sport-item';
+      newSportDiv.innerHTML = `
+        <input type="text" class="editable-field" placeholder="Sport">
+        <input type="text" class="editable-field" placeholder="Skill level">
+        <button onclick="removeSport(this)">×</button>
+      `;
+      sportsList.appendChild(newSportDiv);
+    }
+
+    function removeSport(button) {
+      button.parentElement.remove();
+    }
+
+    async function saveProfile() {
+      const updatedUser = { ...user };
+      
+      // Get updated fields
+      updatedUser.password = document.getElementById('editPassword').value;
+      updatedUser.games_attended = parseInt(document.getElementById('editGamesAttended').value) || 0;
+      updatedUser.motivation = document.getElementById('editMotivation').value;
+      
+      // Get sports data
+      updatedUser.sports = {};
+      document.querySelectorAll('.sport-item').forEach(item => {
+        const sport = item.children[0].value.trim();
+        const level = item.children[1].value.trim();
+        if (sport) updatedUser.sports[sport] = level;
+      });
+
+      try {
+        // Update in mock backend
+        await fetch(`http://localhost:3000/users/${user.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedUser)
+        });
+        
+        // Update local storage
+        localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+        alert('Profile updated successfully!');
+        renderProfile(updatedUser);
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('Failed to update profile');
+      }
     }
 
     function logout() {
@@ -40,6 +128,6 @@
     }
   </script>
 
-  <link rel="stylesheet" href="css/styles.css" />
+
 </body>
 </html>

@@ -41,6 +41,19 @@
       "motivation": "",
       "location": "",
       "metrics": {}
+    },
+    {
+      "id": "6022",
+      "username": "user2",
+      "password": "plaintext2",
+      "sports": {
+        "Tennis": "Intermediate"
+      },
+      "games_attended": 2,
+      "games_enrolled": 0,
+      "motivation": "To be the best!",
+      "location": "",
+      "metrics": {}
     }
   ],
   "games": [
