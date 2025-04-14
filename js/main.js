@@ -4,7 +4,7 @@ let isSignUpMode = false;
 const currentUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
 const authDiv = document.getElementById('authControls');
-const gameForm = document.getElementById('gameForm');
+const gameForm = document.getElementById('toggleGameFormBtn');
 
 if (currentUser) {
   authDiv.innerHTML = `
@@ -59,7 +59,8 @@ function submitAuth() {
         alert('Username already exists. Please choose another.');
         return;
       }
-      createUser({ username, password }).then(newUser => {
+      createUser({ username, password, sports: {}, games_attended : 0,
+      games_enrolled: 0, motivation: "", location: "", metrics: {} }).then(newUser => {
         localStorage.setItem('loggedInUser', JSON.stringify(newUser));
         closeModal();
         location.reload();
@@ -92,27 +93,69 @@ function loadGames() {
     .then(games => {
       const list = document.getElementById('gameList');
       list.innerHTML = '';
-      games.forEach(game => {
-        const li = document.createElement('li');
-        li.textContent = `${game.author}: ${game.content}`;
-        list.appendChild(li);
+
+      games.forEach((game, index) => {
+        const entry = document.createElement('div');
+        entry.classList.add(`game-entry-${game.id}`);
+
+        const titleEl = document.createElement('div');
+        titleEl.id = `game-title`;
+        titleEl.textContent = game.title;
+
+        const descriptionEl = document.createElement('div');
+        descriptionEl.id = `game-description`;
+        descriptionEl.textContent = game.description;
+
+        const locationEl = document.createElement('div');
+        locationEl.id = `game-location`;
+        locationEl.textContent = game.location;
+
+        const dateTimeEl = document.createElement('div');
+        dateTimeEl.id = `game-dateTime`;
+        dateTimeEl.textContent = new Date(game.dateTime).toLocaleString();
+
+        const numPlayersEl = document.createElement('div');
+        numPlayersEl.id = `game-numPlayers`;
+        numPlayersEl.textContent = `Total Players Needed: ${game.numPlayers}`;
+
+        entry.appendChild(titleEl);
+        entry.appendChild(descriptionEl);
+        entry.appendChild(locationEl);
+        entry.appendChild(dateTimeEl);
+        entry.appendChild(numPlayersEl);
+
+        list.appendChild(entry);
       });
     });
 }
 
+
 loadGames();
 
 document.getElementById('submitGameBtn')?.addEventListener('click', () => {
-  const content = document.getElementById('gameContent').value.trim();
-  if (!content) return alert('Cannot game empty content.');
+  const title = document.getElementById('gameTitle').value.trim();
+  const description = document.getElementById('gameDescription').value.trim();
+  const location = document.getElementById('gameLocation').value.trim();
+  const sport = document.getElementById('gameSport').value.trim();
+  const skill = document.getElementById('gameSkill').value.trim();
+  const numPlayers = document.getElementById('numPlayers').value.trim();
+  const dateTime = document.getElementById('gameDateTime').value.trim();  
+
+  if (!title) return alert('Cannot game empty content.');
   fetch('http://localhost:3000/games', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ author: currentUser.username, content })
+    body: JSON.stringify({ title, description, user_id: currentUser.id, location, dateTime, sport, skill, players: [currentUser.id], numPlayers})
   })
   .then(res => res.json())
   .then(() => {
-    document.getElementById('gameContent').value = '';
+    document.getElementById('gameTitle').value = '';
+    document.getElementById('gameDescription').value = '';
+    document.getElementById('gameLocation').value = '';
+    document.getElementById('gameSport').value = '';
+    document.getElementById('gameSkill').value = '';
+    document.getElementById('numPlayers').value = '';
+    document.getElementById('gameDateTime').value = '';
     loadGames();
   });
 });

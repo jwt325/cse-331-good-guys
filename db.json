@@ -16,19 +16,33 @@
         "batting_avg": 0.75,
         "ppg": 15.3
       }
+    },
+    {
+      "id": "3c0d",
+      "username": "test1",
+      "password": "hellohello",
+      "sports": {},
+      "games_attended": 0,
+      "games_enrolled": 0,
+      "motivation": "",
+      "location": "",
+      "metrics": {}
     }
   ],
   "games": [
     {
-      "id": "76bc",
-      "title": "3v3 basketball",
-      "description": "something",
-      "user_id": 1,
-      "location": "outdoor courts",
+      "id": "dd64",
+      "title": "Game one",
+      "description": "fun game",
+      "user_id": "3c0d",
+      "location": "park",
+      "dateTime": "2025-04-10T02:05",
       "sport": "basketball",
-      "skill": "advanced",
-      "players": [],
-      "num_players": 5
+      "skill": "Advanced",
+      "players": [
+        "3c0d"
+      ],
+      "numPlayers": "5"
     }
   ],
   "game_players": [
