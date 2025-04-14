@@ -57,3 +57,76 @@ body {
     font-size: 18px;
     cursor: pointer;
 }
+
+#gameList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  .game-card {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .game-header h3 {
+    font-size: 18px;
+    margin: 0;
+    color: purple;
+  }
+  
+  .game-time {
+    margin: 4px 0 10px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .game-desc {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  
+  .game-joined {
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: #333;
+  }
+  
+  .game-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .join-btn, .contact-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .join-btn {
+    background-color: #eee;
+    color: #333;
+  }
+  
+  .join-btn.joined {
+    background-color: #3dbf3d;
+    color: white;
+  }
+  
+  .contact-btn {
+    background-color: #f0f0f0;
+    color: #222;
+  }
+  

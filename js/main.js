@@ -94,35 +94,33 @@ function loadGames() {
       const list = document.getElementById('gameList');
       list.innerHTML = '';
 
+      games.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+
       games.forEach((game, index) => {
         const entry = document.createElement('div');
-        entry.classList.add(`game-entry-${game.id}`);
+        entry.className = 'game-card';
 
-        const titleEl = document.createElement('div');
-        titleEl.id = `game-title`;
-        titleEl.textContent = game.title;
+        entry.innerHTML = `
+          <div class="game-header">
+            <h3>${game.sport?.toUpperCase() || 'SPORT'} EVENT @ ${game.location || 'Location'}</h3>
+            <p class="game-time">
+              ${new Date(game.dateTime).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} · 
+              ${new Date(game.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} EST
+            </p>
+          </div>
 
-        const descriptionEl = document.createElement('div');
-        descriptionEl.id = `game-description`;
-        descriptionEl.textContent = game.description;
+          <p class="game-desc">${game.description || 'No description provided.'}</p>
+          <p class="game-joined">${game.players?.length || 0}/${game.numPlayers} people joined</p>
 
-        const locationEl = document.createElement('div');
-        locationEl.id = `game-location`;
-        locationEl.textContent = game.location;
-
-        const dateTimeEl = document.createElement('div');
-        dateTimeEl.id = `game-dateTime`;
-        dateTimeEl.textContent = new Date(game.dateTime).toLocaleString();
-
-        const numPlayersEl = document.createElement('div');
-        numPlayersEl.id = `game-numPlayers`;
-        numPlayersEl.textContent = `Total Players Needed: ${game.numPlayers}`;
-
-        entry.appendChild(titleEl);
-        entry.appendChild(descriptionEl);
-        entry.appendChild(locationEl);
-        entry.appendChild(dateTimeEl);
-        entry.appendChild(numPlayersEl);
+          <div class="game-buttons">
+            <button class="join-btn ${game.players?.includes(currentUser?.id) ? 'joined' : ''}">
+              ${game.players?.includes(currentUser?.id)
+                ? `JOINED ${game.players.length}/${game.numPlayers}`
+                : `JOIN ${game.players?.length || 0}/${game.numPlayers}`}
+            </button>
+            <button class="contact-btn">Contact</button>
+          </div>
+        `;
 
         list.appendChild(entry);
       });
