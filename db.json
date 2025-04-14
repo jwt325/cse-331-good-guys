@@ -6,9 +6,8 @@
       "password": "plaintext",
       "email": "test@email.com",
       "sports": {
-        "basketball": "beginner",
-        "tennis": "advanced",
-        "softball": "advanced"
+        "tennis": "beginner",
+        "Basketball": "Advanced"
       },
       "games_attended": 5,
       "games_enrolled": 6,

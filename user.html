@@ -59,14 +59,17 @@
   </style>
 </head>
 <body>
-  <h1>User Profile</h1>
+
   <div class="container">
     <div class="width">
+      <h1>User Profile</h1>
+      <hr>
       <div id="profileInfo"></div>
       <button onclick="window.location.href='index.html'">Back to Feed</button>
       <button onclick="logout()">Logout</button>
     </div>
   </div>
+
 
   <script src="js/api.js"></script>
   <script>
@@ -79,50 +82,44 @@
 
     function renderProfile(userData) {
       profileDiv.innerHTML = `
-            <p><strong>Username:</strong> ${userData.username}</p>
-            <p><strong>Password:</strong> 
-              <input type="password" class="editable-field" id="editPassword" value="${userData.password}">
-            </p>
-            
-            <p><strong>Sports:</strong></p>
-            <div id="sportsList">
-              ${Object.entries(userData.sports || {}).map(([sport, level]) => `
-                <div class="sport-item">
-                  <div class="row">
-                    <input type="text" class="editable-field" value="${sport}" placeholder="Sport">
-                    <input type="text" class="editable-field" value="${level}" placeholder="Skill level">
-                    <button class="remove-btn" onclick="removeSport(this)">×</button>
-                  </div>
-
-                </div>
-              `).join('')}
+        <p><strong>Username:</strong> ${userData.username}</p>
+        <p><strong>Password:</strong> 
+          <input type="password" class="editable-field" id="editPassword" value="${userData.password}">
+        </p>
+        
+        <p><strong>Sports:</strong></p>
+        <div id="sportsList">
+          ${Object.entries(userData.sports || {}).map(([sport, level]) => `
+            <div class="sport-item row">
+              <input type="text" class="editable-field" value="${sport}" placeholder="Sport">
+              <input type="text" class="editable-field" value="${level}" placeholder="Skill level">
+              <button class="remove-btn" onclick="removeSport(this)">×</button>
             </div>
-            <button class="user-btn" onclick="addSportField()">+ Add Sport</button>
-            
-            <p><strong>Games Attended:</strong> 
-              <input type="number" class="editable-field" id="editGamesAttended" value="${userData.games_attended || 0}">
-            </p>
-            
-            <p><strong>Motivation:</strong> 
-              <textarea class="editable-field" id="editMotivation">${userData.motivation || ''}</textarea>
-            </p>
+          `).join('')}
+        </div>
+        <button onclick="addSportField()">+ Add Sport</button>
+        
+        <p><strong>Games Attended:</strong> 
+          <input type="number" class="editable-field" id="editGamesAttended" value="${userData.games_attended || 0}">
+        </p>
+        
+        <p><strong>Motivation:</strong> 
+          <textarea class="editable-field" id="editMotivation">${userData.motivation || ''}</textarea>
+        </p>
 
-            <p><strong>Performance Metrics:</strong></p>
-            <div id="metricsList">
-              ${Object.entries(userData.metrics || {}).map(([metric, detail]) => 
-                `<div class="metric-item">
-                  <div class="row">
-                    <input type="text" class="editable-field" value="${metric}" placeholder="Batting Avg">
-                    <input type="text" class="editable-field" value="${detail}" placeholder="0.319">
-                    <button class="remove-btn"onclick="removeMetric(this)">x</button>
-                  </div>
-
-                </div>
-            `).join('')}
+        <p><strong>Performance Metrics:</strong></p>
+        <div id="metricsList">
+          ${Object.entries(userData.metrics || {}).map(([metric, detail]) => 
+            `<div class="metric-item row">
+              <input type="text" class="editable-field" value="${metric}" placeholder="Batting Avg">
+              <input type="text" class="editable-field" value="${detail}" placeholder="0.319">
+              <button class="remove-btn" onclick="removeMetric(this)">x</button>
             </div>
-            <button class="user-btn" onclick="addMetricField()">+ Add New Performance Metric</button>
-            <br></br>
-            <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+        `).join('')}
+        </div>
+        <button onclick="addMetricField()">+ Add New Performance Metric</button>
+
+        <button class="save-btn" onclick="saveProfile()">Save Changes</button>
       `;
     }
 
