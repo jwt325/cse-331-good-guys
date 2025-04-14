@@ -22,7 +22,6 @@ This project is a front-end prototype for a sports-matching social platform. It 
 2. run `json-server --watch db.json --port 3000`
 3. run `http-server -p 8000`
 
-## Running the app on the sunlab:
-- npm install json-server@0.16.3
-- npm install http-server@0.11.1
+## Running the app on the Sunlab:
+- npm install
 - bash start.sh
