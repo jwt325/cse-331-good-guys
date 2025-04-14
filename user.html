@@ -5,10 +5,15 @@
   <title>User Profile</title>
 </head>
 <body>
-  <h1>User Profile</h1>
-  <div id="profileInfo"></div>
-  <button onclick="window.location.href='index.html'">Back to Feed</button>
-  <button onclick="logout()">Logout</button>
+  <div class="profile-card">
+    <h1>User Profile</h1>
+    <div id="profileInfo"></div>
+
+    <div class="profile-buttons">
+      <button onclick="window.location.href='index.html'">Back to Feed</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
 
   <script>
     const user = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -18,7 +23,7 @@
       const div = document.getElementById('profileInfo');
       div.innerHTML = `
         <p><strong>Username:</strong> ${user.username}</p>
-        <p><strong>Password:</strong> ${user.password}</p>
+        <p><strong>Password:</strong> ********</p>
         <p><strong>Sports:</strong></p>
         <ul>
           ${Object.entries(user.sports).map(([sport, level]) => `<li>${sport}: ${level}</li>`).join('')}
@@ -34,5 +39,7 @@
       window.location.href = 'index.html';
     }
   </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
 </body>
 </html>

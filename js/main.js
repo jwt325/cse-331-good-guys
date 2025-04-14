@@ -8,10 +8,12 @@ const gameForm = document.getElementById('toggleGameFormBtn');
 
 if (currentUser) {
   authDiv.innerHTML = `
-    <span style="cursor: pointer; text-decoration: underline;" onclick="goToUserPage()">
-      Account: ${currentUser.username}
-    </span>
-    <button onclick="logout()">Logout</button>
+    <div class="user-info">
+      <span class="user-link" onclick="goToUserPage()">
+        👤 ${currentUser.username}
+      </span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
   `;
   gameForm.style.display = 'block';
 } else {
