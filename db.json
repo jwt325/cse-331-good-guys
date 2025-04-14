@@ -83,7 +83,8 @@
       "sport": "hg",
       "skill": "hg",
       "players": [
-        "1"
+        "1",
+        "3c0d"
       ],
       "numPlayers": "5"
     },
@@ -98,7 +99,8 @@
       "sport": "hockey",
       "skill": "0",
       "players": [
-        "1"
+        "1",
+        "3c0d"
       ],
       "numPlayers": "5"
     },
@@ -113,7 +115,8 @@
       "sport": "Whatever",
       "skill": "asdasd",
       "players": [
-        "1"
+        "1",
+        "3c0d"
       ],
       "numPlayers": "5"
     }
