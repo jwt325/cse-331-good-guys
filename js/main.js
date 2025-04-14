@@ -93,10 +93,12 @@ function submitAuth() {
 window.submitAuth = submitAuth;
 
 function loadGames() {
+  // const currentUser = JSON.parse(localStorage.getItem('loggedInUser'));
   window.fetchGames()
     .then(games => {
       const list = document.getElementById('gameList');
       list.innerHTML = '';
+
       games.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
 
       games.forEach((game) => {
@@ -160,7 +162,6 @@ function loadGames() {
       });
     });
 };
-
 
 loadGames();
 
