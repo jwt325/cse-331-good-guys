@@ -18,8 +18,8 @@ if (currentUser) {
   gameForm.style.display = 'block';
 } else {
   authDiv.innerHTML = `
-    <button onclick="openModal(false)">Login</button>
-    <button onclick="openModal(true)">Sign Up</button>
+    <button class="user-link" onclick="openModal(false)">Login</button>
+    <button class="user-link" onclick="openModal(true)">Sign Up</button>
   `;
 }
 
@@ -97,13 +97,15 @@ function loadGames() {
     .then(games => {
       const list = document.getElementById('gameList');
       list.innerHTML = '';
-
       games.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
 
-      games.forEach((game, index) => {
+      games.forEach((game) => {
         const entry = document.createElement('div');
         entry.className = 'game-card';
-
+      
+        const alreadyJoined = game.players?.includes(currentUser?.id);
+        const isCreator = game.user_id === currentUser?.id;
+      
         entry.innerHTML = `
           <div class="game-header">
             <h3>${game.sport?.toUpperCase() || 'SPORT'} EVENT @ ${game.location || 'Location'}</h3>
@@ -112,24 +114,52 @@ function loadGames() {
               ${new Date(game.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} EST
             </p>
           </div>
-
           <p class="game-desc">${game.description || 'No description provided.'}</p>
           <p class="game-joined">${game.players?.length || 0}/${game.numPlayers} people joined</p>
-
+      
           <div class="game-buttons">
-            <button class="join-btn ${game.players?.includes(currentUser?.id) ? 'joined' : ''}">
-              ${game.players?.includes(currentUser?.id)
-                ? `GAME JOINED`
-                : `CLICK TO JOIN`}
+            <button class="join-btn ${game.players?.includes(currentUser?.id) ? 'joined' : ''}" data-game-id="${game.id}" ${isCreator ? 'disabled' : ''}>
+              ${alreadyJoined ? 'GAME JOINED' : 'CLICK TO JOIN'}
             </button>
-            <button class="contact-btn"><a href= "mailto:${game.email}">Contact</a></button>
+            <button class="contact-btn"><a href="mailto:${game.email}">Contact</a></button>
           </div>
         `;
-
+      
         list.appendChild(entry);
+      
+        const joinBtn = entry.querySelector('.join-btn');
+      
+        // Only allow toggling for non-creators
+        if (!isCreator) {
+          joinBtn.addEventListener('click', () => {
+            if (!currentUser) {
+              openModal(false);
+              return;
+            }
+
+            const newPlayers = alreadyJoined
+              ? game.players.filter(id => id !== currentUser.id)
+              : [...(game.players || []), currentUser.id];
+      
+            fetch(`http://localhost:3000/games/${game.id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ players: newPlayers })
+            })
+              .then(response => {
+                if (!response.ok) throw new Error("Failed to update game");
+                return response.json();
+              })
+              .then(() => loadGames())
+              .catch(err => {
+                console.error("Error updating game:", err);
+                alert("An error occurred while updating your game status.");
+              });
+          });
+        }
       });
     });
-}
+};
 
 
 loadGames();

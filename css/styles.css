@@ -106,7 +106,7 @@ body {
   gap: 10px;
 }
   
-.join-btn, .contact-btn {
+.join-btn, .join-btn.joined, .contact-btn {
   flex: 1;
   padding: 8px;
   border: none;
