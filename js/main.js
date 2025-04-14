@@ -37,6 +37,7 @@ function openModal(signup) {
   isSignUpMode = signup;
   document.getElementById('authModal').style.display = 'flex';
   document.getElementById('modalTitle').textContent = signup ? 'Sign Up' : 'Login';
+  document.getElementById('email').style.display = signup ? 'block' : 'none';
 }
 
 function closeModal() {
@@ -48,6 +49,7 @@ function closeModal() {
 function submitAuth() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
+  const email = document.getElementById('email').value.trim();
 
   if (!username || !password) {
     alert('Username and password are required.');
@@ -61,7 +63,7 @@ function submitAuth() {
         alert('Username already exists. Please choose another.');
         return;
       }
-      createUser({ username, password, sports: {}, games_attended : 0,
+      createUser({ username, password, email, sports: {}, games_attended : 0,
       games_enrolled: 0, motivation: "", location: "", metrics: {} }).then(newUser => {
         localStorage.setItem('loggedInUser', JSON.stringify(newUser));
         closeModal();
@@ -120,7 +122,7 @@ function loadGames() {
                 ? `GAME JOINED`
                 : `CLICK TO JOIN`}
             </button>
-            <button class="contact-btn">Contact</button>
+            <button class="contact-btn"><a href= "mailto:${game.email}">Contact</a></button>
           </div>
         `;
 
@@ -145,7 +147,7 @@ document.getElementById('submitGameBtn')?.addEventListener('click', () => {
   fetch('http://localhost:3000/games', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title, description, user_id: currentUser.id, location, dateTime, sport, skill, players: [currentUser.id], numPlayers})
+    body: JSON.stringify({ title, description, user_id: currentUser.id, email:currentUser.email, location, dateTime, sport, skill, players: [currentUser.id], numPlayers})
   })
   .then(res => res.json())
   .then(() => {

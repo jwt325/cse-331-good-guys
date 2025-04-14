@@ -14,37 +14,35 @@
 
   <hr>
 
-  <button id="toggleGameFormBtn" style="display: none;">+ Create Game +</button>
+  <button id="toggleGameFormBtn" style="display: none;">Create A New Event</button>
 
-  <div id="gameForm" style="display: none;">
-    <h3>Create a Game</h3>
-    
-    <label for="gameTitle">Title:</label><br>
-    <input type="text" id="gameTitle" placeholder="Game title"><br><br>
+  <div id="gameForm" class="form-container"  style="display: none;">
+    <h3 id="createGameTitle">Create an Event</h3>
   
-    <label for="gameDescription">Description:</label><br>
-    <textarea id="gameDescription" rows="3" cols="50" placeholder="Game description"></textarea><br><br>
+    <label for="gameTitle">Title:</label>
+    <input type="text" id="gameTitle" placeholder="Game title">
   
-    <label for="gameLocation">Location:</label><br>
-    <input type="text" id="gameLocation" placeholder="Location"><br><br>
+    <label for="gameDescription">Description:</label>
+    <textarea id="gameDescription" rows="3" cols="50" placeholder="Game description"></textarea>
   
-    <label for="gameSport">Sport:</label><br>
-    <input type="text" id="gameSport" placeholder="Sport type"><br><br>
+    <label for="gameLocation">Location:</label>
+    <input type="text" id="gameLocation" placeholder="Location">
   
-    <label for="gameSkill">Skill Level:</label><br>
-    <input type="text" id="gameSkill" placeholder="Skill level"><br><br>
+    <label for="gameSport">Sport:</label>
+    <input type="text" id="gameSport" placeholder="Sport type">
   
-    <!-- <label for="currentPlayers">Current Players:</label><br>
-    <input type="number" id="currentPlayers" min="0" value="0"><br><br> -->
+    <label for="gameSkill">Skill Level:</label>
+    <input type="text" id="gameSkill" placeholder="Skill level">
   
-    <label for="numPlayers">Total Players Needed:</label><br>
-    <input type="number" id="numPlayers" min="1" value="5"><br><br>
+    <label for="numPlayers">Total Players Needed:</label>
+    <input type="number" id="numPlayers" min="1" value="5">
   
-    <label for="gameDateTime">Date and Time:</label><br>
-    <input type="datetime-local" id="gameDateTime"><br><br>
+    <label for="gameDateTime">Date and Time:</label>
+    <input type="datetime-local" id="gameDateTime">
   
     <button id="submitGameBtn">Create</button>
   </div>
+  
 
   <script>
     const toggleBtn = document.getElementById('toggleGameFormBtn');
@@ -53,10 +51,10 @@
     toggleBtn.addEventListener('click', () => {
       if (gameForm2.style.display === 'none') {
         gameForm2.style.display = 'block';
-        toggleBtn.textContent = '− Hide Game Form';
+        toggleBtn.textContent = 'Hide Event Form';
       } else {
         gameForm2.style.display = 'none';
-        toggleBtn.textContent = '+ Create Game +';
+        toggleBtn.textContent = 'Create A New Event';
       }
     });
   </script>
@@ -68,6 +66,7 @@
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">×</span>
       <h3 id="modalTitle">Login</h3>
+      <input type="email" id="email" placeholder="Email" style="display: none;" required />
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
       <button onclick="submitAuth()">Submit</button>
