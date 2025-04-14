@@ -58,112 +58,19 @@
   ],
   "games": [
     {
-      "id": "dd64",
-      "title": "Game one",
-      "description": "fun game",
+      "id": "6df3",
+      "title": "Hockey 3v3",
+      "description": "Friendly 3v3 @ Steel in bethlehem",
       "user_id": "3c0d",
       "email": "test@email.com",
-      "location": "park",
-      "dateTime": "2025-04-10T02:05",
-      "sport": "basketball",
-      "skill": "Advanced",
+      "location": "Steel Ice Center",
+      "dateTime": "2025-04-22T14:18",
+      "sport": "Hockey",
+      "skill": "Intermediate",
       "players": [
         "3c0d"
       ],
-      "numPlayers": "5"
-    },
-    {
-      "id": "e051",
-      "title": "sdngv",
-      "description": "hg",
-      "user_id": "1",
-      "email": "test@email.com",
-      "location": "hg",
-      "dateTime": "2025-04-13T23:32",
-      "sport": "hg",
-      "skill": "hg",
-      "players": [
-        "1",
-        "3c0d"
-      ],
-      "numPlayers": "5"
-    },
-    {
-      "id": "c679",
-      "title": "hockey",
-      "description": "",
-      "user_id": "1",
-      "email": "test@email.com",
-      "location": "steel",
-      "dateTime": "2025-04-11T23:37",
-      "sport": "hockey",
-      "skill": "0",
-      "players": [
-        "1",
-        "3c0d"
-      ],
-      "numPlayers": "5"
-    },
-    {
-      "id": "2b6d",
-      "title": "New test",
-      "description": "Sick",
-      "user_id": "1",
-      "email": "test@email.com",
-      "location": "Awesome",
-      "dateTime": "2025-04-24T23:51",
-      "sport": "Whatever",
-      "skill": "asdasd",
-      "players": [
-        "1",
-        "3c0d"
-      ],
-      "numPlayers": "5"
-    },
-    {
-      "title": "adsdsad",
-      "description": "sadsads",
-      "user_id": "1",
-      "email": "test@email.com",
-      "location": "adsadsa",
-      "dateTime": "2025-04-09T13:48",
-      "sport": "dsadsa",
-      "skill": "dsadsa",
-      "players": [
-        "1"
-      ],
-      "numPlayers": "5",
-      "id": "3n12KGr"
-    },
-    {
-      "title": "Newers",
-      "description": "sdsad",
-      "user_id": "1",
-      "email": "test@email.com",
-      "location": "sadsa",
-      "dateTime": "2025-04-02T13:51",
-      "sport": "dasdsa",
-      "skill": "dsadsad",
-      "players": [
-        "1"
-      ],
-      "numPlayers": "5",
-      "id": "t50TSts"
-    },
-    {
-      "title": "Newest",
-      "description": "Here",
-      "user_id": "1",
-      "email": "test@email.com",
-      "location": "sadsa",
-      "dateTime": "2025-03-26T13:53",
-      "sport": "dsadsa",
-      "skill": "dsadsa",
-      "players": [
-        "1"
-      ],
-      "numPlayers": "5",
-      "id": "nq8l0q5"
+      "numPlayers": "6"
     }
   ],
   "game_players": [
