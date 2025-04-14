@@ -115,8 +115,8 @@ function loadGames() {
           <div class="game-buttons">
             <button class="join-btn ${game.players?.includes(currentUser?.id) ? 'joined' : ''}">
               ${game.players?.includes(currentUser?.id)
-                ? `JOINED ${game.players.length}/${game.numPlayers}`
-                : `JOIN ${game.players?.length || 0}/${game.numPlayers}`}
+                ? `GAME JOINED`
+                : `CLICK TO JOIN`}
             </button>
             <button class="contact-btn">Contact</button>
           </div>
