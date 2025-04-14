@@ -238,9 +238,4 @@ function enrollPlayer(game_id, player_id) {
 //Expose the function
 window.enrollPlayer = enrollPlayer;
 
-/**
- * Function to unenroll a player
- * @param 
- */
-
 

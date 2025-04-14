@@ -67,7 +67,19 @@
         <p><strong>Motivation:</strong> 
           <textarea class="editable-field" id="editMotivation">${userData.motivation || ''}</textarea>
         </p>
-        
+
+        <p><strong>Performance Metrics:</strong></p>
+        <div id="metricsList">
+          ${Object.entries(userData.metrics || {}).map(([metric, detail]) => 
+            `<div class="metric-item">
+              <input type="text" class="editable-field" value="${metric}" placeholder="Batting Avg">
+              <input type="text" class="editable-field" value="${detail}" placeholder="0.319">
+              <button onclick="removeMetric(this)">x</button>
+            </div>
+        `).join('')}
+        </div>
+        <button onclick="addMetricField()">+ Add New Performance Metric</button>
+
         <button class="save-btn" onclick="saveProfile()">Save Changes</button>
       `;
     }
@@ -88,6 +100,22 @@
       button.parentElement.remove();
     }
 
+    function addMetricField() {
+      const metricList = document.getElementById('metricsList');
+      const newMetricDiv = document.createElement('div');
+      newMetricDiv.className = 'metric-item';
+      newMetricDiv.innerHTML = `
+        <input type="text" class="editable-field" placeholder="Batting Avg">
+        <input type="text" class="editable-field" placeholder="0.71">
+        <button onclick="removeMetric(this)">x</button>
+      `;
+      metricList.appendChild(newMetricDiv);
+    }
+
+    function removeMetric(button) {
+      button.parentElement.remove();
+    }
+
     async function saveProfile() {
       const updatedUser = { ...user };
       
@@ -104,6 +132,13 @@
         if (sport) updatedUser.sports[sport] = level;
       });
 
+      // Get metrics data
+      updatedUser.metrics = {};
+      document.querySelectorAll('.metric-item').forEach(item => {
+        const metric = item.children[0].value.trim();
+        const value = item.children[1].value.trim();
+        if (metric) updatedUser.metrics[metric] = value;
+      });
       try {
         // Update in mock backend
         await fetch(`http://localhost:3000/users/${user.id}`, {
