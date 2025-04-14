@@ -31,7 +31,7 @@
     .user-btn {
       flex: 1;
       padding: 8px;
-      border: none;
+      border: 1px solid black;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
@@ -65,8 +65,8 @@
       <h1>User Profile</h1>
       <hr>
       <div id="profileInfo"></div>
-      <button onclick="window.location.href='index.html'">Back to Feed</button>
-      <button onclick="logout()">Logout</button>
+      <button class="user-btn" onclick="window.location.href='index.html'">Back to Feed</button>
+      <button class="user-btn" onclick="logout()">Logout</button>
     </div>
   </div>
 
@@ -97,7 +97,7 @@
             </div>
           `).join('')}
         </div>
-        <button onclick="addSportField()">+ Add Sport</button>
+        <button class="user-btn" onclick="addSportField()">+ Add Sport</button>
         
         <p><strong>Games Attended:</strong> 
           <input type="number" class="editable-field" id="editGamesAttended" value="${userData.games_attended || 0}">
@@ -117,7 +117,7 @@
             </div>
         `).join('')}
         </div>
-        <button onclick="addMetricField()">+ Add New Performance Metric</button>
+        <button class="user-btn" onclick="addMetricField()">+ Add New Performance Metric</button>
 
         <button class="save-btn" onclick="saveProfile()">Save Changes</button>
       `;
