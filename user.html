@@ -5,7 +5,16 @@
   <title>User Profile</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+    .width {
+      flex: 0 0 35%;
+      margin: 0 auto;
+    }
     .editable-field {
+      flex: 1;
       border: 1px solid #ddd;
       padding: 5px;
       margin: 5px 0;
@@ -13,6 +22,29 @@
     .editable-field:focus {
       border-color: purple;
       outline: none;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-btn {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .remove-btn{
+      flex:  0 0 10%;
+      width: 30px;
+      padding: 5px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #e74c3c;
     }
     .save-btn {
       background-color: purple;
@@ -28,9 +60,13 @@
 </head>
 <body>
   <h1>User Profile</h1>
-  <div id="profileInfo"></div>
-  <button onclick="window.location.href='index.html'">Back to Feed</button>
-  <button onclick="logout()">Logout</button>
+  <div class="container">
+    <div class="width">
+      <div id="profileInfo"></div>
+      <button onclick="window.location.href='index.html'">Back to Feed</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
 
   <script src="js/api.js"></script>
   <script>
@@ -43,44 +79,50 @@
 
     function renderProfile(userData) {
       profileDiv.innerHTML = `
-        <p><strong>Username:</strong> ${userData.username}</p>
-        <p><strong>Password:</strong> 
-          <input type="password" class="editable-field" id="editPassword" value="${userData.password}">
-        </p>
-        
-        <p><strong>Sports:</strong></p>
-        <div id="sportsList">
-          ${Object.entries(userData.sports || {}).map(([sport, level]) => `
-            <div class="sport-item">
-              <input type="text" class="editable-field" value="${sport}" placeholder="Sport">
-              <input type="text" class="editable-field" value="${level}" placeholder="Skill level">
-              <button onclick="removeSport(this)">×</button>
-            </div>
-          `).join('')}
-        </div>
-        <button onclick="addSportField()">+ Add Sport</button>
-        
-        <p><strong>Games Attended:</strong> 
-          <input type="number" class="editable-field" id="editGamesAttended" value="${userData.games_attended || 0}">
-        </p>
-        
-        <p><strong>Motivation:</strong> 
-          <textarea class="editable-field" id="editMotivation">${userData.motivation || ''}</textarea>
-        </p>
+            <p><strong>Username:</strong> ${userData.username}</p>
+            <p><strong>Password:</strong> 
+              <input type="password" class="editable-field" id="editPassword" value="${userData.password}">
+            </p>
+            
+            <p><strong>Sports:</strong></p>
+            <div id="sportsList">
+              ${Object.entries(userData.sports || {}).map(([sport, level]) => `
+                <div class="sport-item">
+                  <div class="row">
+                    <input type="text" class="editable-field" value="${sport}" placeholder="Sport">
+                    <input type="text" class="editable-field" value="${level}" placeholder="Skill level">
+                    <button class="remove-btn" onclick="removeSport(this)">×</button>
+                  </div>
 
-        <p><strong>Performance Metrics:</strong></p>
-        <div id="metricsList">
-          ${Object.entries(userData.metrics || {}).map(([metric, detail]) => 
-            `<div class="metric-item">
-              <input type="text" class="editable-field" value="${metric}" placeholder="Batting Avg">
-              <input type="text" class="editable-field" value="${detail}" placeholder="0.319">
-              <button onclick="removeMetric(this)">x</button>
+                </div>
+              `).join('')}
             </div>
-        `).join('')}
-        </div>
-        <button onclick="addMetricField()">+ Add New Performance Metric</button>
+            <button class="user-btn" onclick="addSportField()">+ Add Sport</button>
+            
+            <p><strong>Games Attended:</strong> 
+              <input type="number" class="editable-field" id="editGamesAttended" value="${userData.games_attended || 0}">
+            </p>
+            
+            <p><strong>Motivation:</strong> 
+              <textarea class="editable-field" id="editMotivation">${userData.motivation || ''}</textarea>
+            </p>
 
-        <button class="save-btn" onclick="saveProfile()">Save Changes</button>
+            <p><strong>Performance Metrics:</strong></p>
+            <div id="metricsList">
+              ${Object.entries(userData.metrics || {}).map(([metric, detail]) => 
+                `<div class="metric-item">
+                  <div class="row">
+                    <input type="text" class="editable-field" value="${metric}" placeholder="Batting Avg">
+                    <input type="text" class="editable-field" value="${detail}" placeholder="0.319">
+                    <button class="remove-btn"onclick="removeMetric(this)">x</button>
+                  </div>
+
+                </div>
+            `).join('')}
+            </div>
+            <button class="user-btn" onclick="addMetricField()">+ Add New Performance Metric</button>
+            <br></br>
+            <button class="save-btn" onclick="saveProfile()">Save Changes</button>
       `;
     }
 
