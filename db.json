@@ -58,21 +58,6 @@
   ],
   "games": [
     {
-      "id": "dd64",
-      "title": "Game one",
-      "description": "fun game",
-      "user_id": "3c0d",
-      "email": "test@email.com",
-      "location": "park",
-      "dateTime": "2025-04-10T02:05",
-      "sport": "basketball",
-      "skill": "Advanced",
-      "players": [
-        "3c0d"
-      ],
-      "numPlayers": "5"
-    },
-    {
       "id": "e051",
       "title": "sdngv",
       "description": "hg",
@@ -115,8 +100,7 @@
       "sport": "Whatever",
       "skill": "asdasd",
       "players": [
-        "1",
-        "3c0d"
+        "1"
       ],
       "numPlayers": "5"
     },
@@ -160,10 +144,26 @@
       "sport": "dsadsa",
       "skill": "dsadsa",
       "players": [
-        "1"
+        "1",
+        "3c0d"
       ],
       "numPlayers": "5",
       "id": "nq8l0q5"
+    },
+    {
+      "title": "Test game",
+      "description": "sadsadsa",
+      "user_id": "3c0d",
+      "email": "test@email.com",
+      "location": "sadsad",
+      "dateTime": "2025-04-03T12:58",
+      "sport": "dasda",
+      "skill": "dasdsadsa",
+      "players": [
+        "3c0d"
+      ],
+      "numPlayers": "5",
+      "id": "aWzwoAb"
     }
   ],
   "game_players": [

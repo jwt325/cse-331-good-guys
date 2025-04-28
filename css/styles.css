@@ -106,7 +106,7 @@ body {
   gap: 10px;
 }
   
-.join-btn, .join-btn.joined, .contact-btn {
+.join-btn, .join-btn.joined, .contact-btn, .delete-btn {
   flex: 1;
   padding: 8px;
   border: none;
@@ -128,6 +128,11 @@ body {
 .contact-btn {
   background-color: #f0f0f0;
   color: #222;
+}
+
+.delete-btn {
+  background-color: #ff0000;
+  color: #ffffff;
 }
 
 .profile-card {

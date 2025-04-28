@@ -92,8 +92,35 @@ function submitAuth() {
 
 window.submitAuth = submitAuth;
 
+function openConfirmModal(message, onConfirm) {
+  const confirmModal = document.getElementById('confirmModal');
+  const confirmMessage = document.getElementById('confirmMessage');
+  const confirmYesBtn = document.getElementById('confirmYesBtn');
+  const confirmNoBtn = document.getElementById('confirmNoBtn');
+
+  confirmMessage.textContent = message;
+  confirmModal.style.display = 'flex';
+
+  const yesHandler = () => {
+    onConfirm();
+    closeConfirmModal();
+  };
+
+  const noHandler = () => {
+    closeConfirmModal();
+  };
+
+  confirmYesBtn.onclick = yesHandler;
+  confirmNoBtn.onclick = noHandler;
+}
+
+function closeConfirmModal() {
+  const confirmModal = document.getElementById('confirmModal');
+  confirmModal.style.display = 'none';
+}
+
+
 function loadGames() {
-  // const currentUser = JSON.parse(localStorage.getItem('loggedInUser'));
   window.fetchGames()
     .then(games => {
       const list = document.getElementById('gameList');
@@ -120,48 +147,73 @@ function loadGames() {
           <p class="game-joined">${game.players?.length || 0}/${game.numPlayers} people joined</p>
       
           <div class="game-buttons">
-            <button class="join-btn ${game.players?.includes(currentUser?.id) ? 'joined' : ''}" data-game-id="${game.id}" ${isCreator ? 'disabled' : ''}>
-              ${alreadyJoined ? 'GAME JOINED' : 'CLICK TO JOIN'}
-            </button>
-            <button class="contact-btn"><a href="mailto:${game.email}">Contact</a></button>
+            ${!isCreator ? `
+              <button class="join-btn ${alreadyJoined ? 'joined' : ''}" data-game-id="${game.id}">
+                ${alreadyJoined ? 'GAME JOINED' : 'CLICK TO JOIN'}
+              </button>
+              <button class="contact-btn"><a href="mailto:${game.email}">Contact</a></button>
+            ` : `
+              <button class="delete-btn" data-game-id="${game.id}">DELETE EVENT</button>
+            `}
           </div>
         `;
       
         list.appendChild(entry);
-      
-        const joinBtn = entry.querySelector('.join-btn');
-      
-        // Only allow toggling for non-creators
+
         if (!isCreator) {
+          const joinBtn = entry.querySelector('.join-btn');
           joinBtn.addEventListener('click', () => {
             if (!currentUser) {
               openModal(false);
               return;
             }
 
-            const newPlayers = alreadyJoined
-              ? game.players.filter(id => id !== currentUser.id)
-              : [...(game.players || []), currentUser.id];
-      
-            fetch(`http://localhost:3000/games/${game.id}`, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ players: newPlayers })
-            })
-              .then(response => {
-                if (!response.ok) throw new Error("Failed to update game");
-                return response.json();
+            openConfirmModal(
+              alreadyJoined ? "Are you sure you want to leave this event?" : "Are you sure you want to join this event?",
+              () => {
+                const newPlayers = alreadyJoined
+                  ? game.players.filter(id => id !== currentUser.id)
+                  : [...(game.players || []), currentUser.id];
+
+                fetch(`http://localhost:3000/games/${game.id}`, {
+                  method: 'PATCH',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ players: newPlayers })
+                })
+                  .then(response => {
+                    if (!response.ok) throw new Error("Failed to update game");
+                    return response.json();
+                  })
+                  .then(() => loadGames())
+                  .catch(err => {
+                    console.error("Error updating game:", err);
+                    alert("An error occurred while updating your game status.");
+                  });
+              }
+            );
+          });
+        } else {
+          const deleteBtn = entry.querySelector('.delete-btn');
+          deleteBtn.addEventListener('click', () => {
+            openConfirmModal("Are you sure you want to permanently delete this event?", () => {
+              fetch(`http://localhost:3000/games/${game.id}`, {
+                method: 'DELETE'
               })
-              .then(() => loadGames())
-              .catch(err => {
-                console.error("Error updating game:", err);
-                alert("An error occurred while updating your game status.");
-              });
+                .then(response => {
+                  if (!response.ok) throw new Error("Failed to delete game");
+                  loadGames();
+                })
+                .catch(err => {
+                  console.error("Error deleting game:", err);
+                  alert("An error occurred while trying to delete this game.");
+                });
+            });
           });
         }
       });
     });
-};
+}
+
 
 loadGames();
 
