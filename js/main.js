@@ -139,6 +139,10 @@ function loadGames() {
           <div class="game-header">
             <h3>${game.sport?.toUpperCase() || 'SPORT'} EVENT @ ${game.location || 'Location'}</h3>
             <p class="game-time">
+              ${game.sport || 'No sport provided.'} · 
+              ${game.skill || 'All Skill Levels Welcome'}
+            </p>
+            <p class="game-time">
               ${new Date(game.dateTime).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} · 
               ${new Date(game.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} EST
             </p>
