@@ -121,7 +121,6 @@
       "sport": "Tennis",
       "skill": "Intermediate",
       "players": [
-<<<<<<< HEAD
         "1"
       ],
       "numPlayers": "5"
@@ -186,11 +185,6 @@
       ],
       "numPlayers": "5",
       "id": "aWzwoAb"
-=======
-        "1f3d"
-      ],
-      "numPlayers": "4"
->>>>>>> 58904b53e649dd9172c32012294df25712bc3538
     }
   ],
   "game_players": [
